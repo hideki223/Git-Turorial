@@ -6,13 +6,157 @@
 <meta name="description" content="">
 <meta name="keywords" content="">
 
-<link rel="stylesheet" type="text/css" href="css/html5reset.css"  />
+
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
+<link rel="stylesheet" type="text/css" href="css/html5reset.css"	/>
+<link rel="stylesheet" type="text/css" href="css/style.css"	/>
 </head>
 
 	<body>
 		<h1>Git Hubのテスト</h1>
+		
+		
+	<section>
+		<h2>CSSのcontentプロパティーを使いこなそう</h2>
+	</section>
+	
+	
+	<section class="tooltip-area">
+		<h3>ツールチップで title 属性のテキストを表示</h3>
+		<h4>URLと同様に、属性を指定して表示する小技をもうひとつ。「かつてはJavaScriptを利用していたものの、今ではCSSのみで実装できる10の小技」で紹介したツールチップの例では、content: attr(title); で title 属性を指定して表示しています。アイデア次第でいろんな応用ができるかも？</h4>
+	
+		<p style="text-align: center;"><a href="#" title="Hello from speech bubble!" class="tooltip">CSS Tooltip! Hover me!</a></p>
+		
+		
+		<style>	
+			.tooltip-area a {
+								font-size:30px;line-height: 1;
+								color: #0bd;
+								text-decoration: none;
+								border:0px solid red;
+								font-size:40px;
+							}
+			
+			.tooltip:hover 		{
+								display: inline-block;
+								position: relative;
+								border:0px solid green;width:500px;
+							}
+			
+			.tooltip:hover:after
+							{
+								display: -webkit-flex;
+								display: flex;
+								-webkit-justify-content: center;
+								justify-content: center;
+								background: #444;
+								border-radius: 8px;
+								color: #fff;content: attr(title);
+								margin: 40px auto 0;
+								font-size: 16px;
+								line-height: 1;
+								padding: 40px;
+							}
+			
+			.tooltip:hover:before
+							{
+								border: solid;
+								border-color: #444 transparent;
+								border-width: 0 12px 12px 12px;
+								content: "";
+								left: 45%;
+								bottom: 96px;
+								position: absolute;
+							}
+
+		</style>
+			
+
+
+		
+	</section>
+
+
+
+	
+	<section class="">
+		<h3>テキストを表示</h3>
+		<h4>
+			:before や :after 擬似要素を使って、要素の前後に任意のテキストを表示できます。書き方は簡単で、擬似要素に content: "テキストの内容"; を加えればOK。テキストはシングルまたはダブルクオーテーションで囲むのを忘れずに！<br />
+			以下の例では「new」というクラスのついたリストの後に「NEW!」というテキストを表示しています。テキストの装飾もできるので、素敵にカスタマイズしちゃってください！</h4>
+		
+		<style>
+		li {
+			margin: 10px 0;
+		}
+		.new:after {
+			content: "NEW!!";
+			font-size: .75em;
+			background: #FF9F80;
+			color: #fff;
+			padding: 5px 5px 3px;
+			margin-left: 5px;
+			border-radius: 3px;
+		}
+		</style>		
+		<ul>
+			<li class="new">Runaway Jacket - $198.00</li>
+			<li>Breezy Tank - $48.00</li>
+			<li>Devi Yoga Pant - $98.00</li>
+			<li class="new">Weekend Warrior Bag - $148.00</li>
+		</ul>
+	</section>
+
+	<section class="">
+		<h3>画像を表示</h3>
+		<h4>content にはテキストだけでなく、画像を指定することも可能。背景画像を指定するのと同じように、url で画像のパスを記述します。例ではリンク先やファイルタイプによってアイコンを変更しています。</h4>
+		<style>
+			a:after{	padding: 0 5px;
+			}
+			/* 外部リンク */
+			a[href^="http://"]:after {
+			  content: url(http://webcreatorbox.com/sample/images/link.svg);
+			}
+			/* メール */
+			a[href^="mailto:"]:after {
+			  content: url(http://webcreatorbox.com/sample/images/email.svg);
+			}
+			/* PDF */
+			a[href$=".pdf"]:after {
+			  content: url(http://webcreatorbox.com/sample/images/doc.svg);
+			}	
+		</style>
+		<p>http:// から始まる<a href="http://google.com">外部リンク</a>にアイコンをプラス。mailto を使った<a href="mailto:hello@example.com">メールリンク</a>にはメールアイコン。URLを指定することもできます。<a href="example.pdf">PDFファイル</a>など、拡張子で指定もできますよー！</p>
+	
+	</section>
+	
+	
+	<section class="">
+		<h3>カウンター</h3>
+		<h4>「第一章、第二章…」や「一時間目、二時間目…」など、数字＋他の単語も一緒に表示したい場合は counter-increment プロパティー と content プロパティーを一緒に使います。このプロパティーを使えば、指定した要素が登場する度に数字を1つずつ増やしていくことができます。また、リストタグを使わなくても実装できますが、「番号リスト」の役割を持つ ol タグを使うのが無難かと思います。</h4>
+		<ol>
+			<li>下線部Aの時期にみられた好況期の通称を選べ。</li>
+			<li>環境保護についての法制度の記述として正しいものを一つ選べ。</li>
+			<li>日本経済の記述として最も適切なものを選べ。</li>
+		<ol>
+			
+			
+		<style>
+			li {
+				  list-style: none;
+				  counter-increment : chapter;
+				}
+				li:before {
+				  content : "第" counter(chapter) "問";
+				  padding-right: 10px;
+				} 
+		</style>
+	</section>
+	
+	
+	
+			
 	</body>
 </html>
